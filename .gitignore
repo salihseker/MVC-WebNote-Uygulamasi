@@ -9,3 +9,6 @@
 /WebNote/WebNote.WebApp/obj/Debug
 /WebNote/WebNote.WebApp/Properties
 /WebNote/WebNote.WebApp/Web.Debug.config
+/WebNote/WebNote.BusinessLayer/obj/Debug
+/WebNote/WebNote.Entities/obj/Debug
+/WebNote/WebNote.DataAccessLayer/obj/Debug

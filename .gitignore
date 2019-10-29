@@ -12,3 +12,6 @@
 /WebNote/WebNote.BusinessLayer/obj/Debug
 /WebNote/WebNote.Entities/obj/Debug
 /WebNote/WebNote.DataAccessLayer/obj/Debug
+/WebNote/WebNote.BusinessLayer/bin/Debug
+/WebNote/WebNote.DataAccessLayer/bin/Debug
+/WebNote/WebNote.Entities/bin/Debug

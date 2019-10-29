@@ -3,12 +3,17 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.ComponentModel.DataAnnotations.Schema;
+using System.ComponentModel.DataAnnotations;
 
 namespace WebNote.Entities
 {
+    [Table("Notes")]
     public class Note : EntityBase
     {
+        [Required, StringLength(150)]
         public string Title { get; set; }
+        [Required, StringLength(2000)]
         public string Text { get; set; }
         public bool IsDraft { get; set; }
         public int LikeCount { get; set; }

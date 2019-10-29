@@ -7,12 +7,11 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="description" content="">
     <meta name="author" content="">
-    <title>Shop Homepage - Start Bootstrap Template</title>
+    <title>Web Note MVC Uygulaması - Salih ŞEKER</title>
     <!-- Bootstrap Core CSS -->
     <link href="~/Content/bootstrap.min.css" rel="stylesheet">
     <!-- Custom CSS -->
     <link href="~/Content/shop-homepage.css" rel="stylesheet">
-
     <!-- jQuery -->
     <script src="~/Scripts/jquery-3.1.1.min.js"></script>
     <!-- Bootstrap Core JavaScript -->
@@ -28,24 +27,50 @@
             <!-- Brand and toggle get grouped for better mobile display -->
             <div class="navbar-header">
                 <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
-                    <span class="sr-only">Toggle navigation</span>
+                    <span class="sr-only">Menü</span>
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </button>
-                <a class="navbar-brand" href="#">Start Bootstrap</a>
+                <a class="navbar-brand" href="#">WebNote</a>
             </div>
-            <!-- Collect the nav links, forms, and other content for toggling -->
+            <!-- Collect the nav links, forms, and oth er content for toggling -->
             <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
                 <ul class="nav navbar-nav">
                     <li>
-                        <a href="#">About</a>
+                        <a href="#"><span class="glyphicon glyphicon-wrench"></span> Yönetim</a>
                     </li>
                     <li>
-                        <a href="#">Services</a>
+                        <a href="#"><span class="glyphicon glyphicon-star"></span> En Beğenilenler</a>
                     </li>
                     <li>
-                        <a href="#">Contact</a>
+                        <a href="#"><span class="glyphicon glyphicon-th-list"></span> Son Yazılanlar</a>
+                    </li>
+                    <li>
+                        <a href="#"><span class="glyphicon glyphicon-info-sign"></span> Hakkımızda</a>
+                    </li>
+
+                </ul>
+                <ul class="nav navbar-nav navbar-right">
+                    <li>
+                        <a href="#">
+                            <span class="glyphicon glyphicon-log-in"> Giriş
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#">
+                            <span class="glyphicon glyphicon-user"> Üye Ol
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#">
+                            <span class="glyphicon glyphicon-user"> salihseker
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#">
+                            <span class="glyphicon glyphicon-log-out"> Çıkış
+                        </a>
                     </li>
                 </ul>
             </div>
@@ -65,8 +90,41 @@
         <!-- Footer -->
         <footer>
             <div class="row">
-                <div class="col-lg-12">
-                    <p>Copyright &copy; Salih ŞEKER - WebNote @DateTime.Now.Year</p>
+                <div class="col-lg-4 text-center">
+                    <h5>
+                        <strong>Site Haritası</strong>
+                    </h5>
+                    <hr />
+                    <p>
+                        <a href="#">En Beğenilenler</a><br />
+                        <a href="#">Son Yazılanlar</a><br />
+                        <a href="#">Hakkımızda</a><br />
+                    </p>
+                </div>
+                <div class="col-lg-4 text-center" ">
+                    <h5>
+                        <strong>WebNote</strong>
+                    </h5>
+                    <hr />
+                    <p>Tüm Hakları Saklıdır &copy; Salih ŞEKER - WebNote @DateTime.Now.Year</p>
+                </div>
+                <div class="col-lg-4 text-center" ">
+                    <h5>
+                        <strong>E-Bülten Üyelik</strong>
+                    </h5>
+                    <hr />
+                    <div class="col-md-12">
+                        <div class="input-group">
+                            <input type="text" class="form-control" placeholder="e-posta adresiniz">
+                            <span class="input-group-btn">
+                                <button class="btn btn-primary" type="submit">
+                                    Gönder <span class="glyphicon glyphicon-send"></span>
+                                </button>
+                            </span>
+
+                        </div>
+                    </div>
+
                 </div>
             </div>
         </footer>

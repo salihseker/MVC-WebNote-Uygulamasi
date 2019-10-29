@@ -14,7 +14,7 @@ namespace WebNote.Entities
         public int Id { get; set; }
 
         [Required]
-        public DateTime CreateOn { get; set; }
+        public DateTime CreatedOn { get; set; }
         [Required]
         public DateTime ModifiedOn { get; set; }
 

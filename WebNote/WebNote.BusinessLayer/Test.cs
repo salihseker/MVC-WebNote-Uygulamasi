@@ -14,7 +14,7 @@ namespace WebNote.BusinessLayer
         public void test()
         {
             DatabaseContext db = new DatabaseContext();
-            db.Database.CreateIfNotExists();
+            db.Categories.ToList();
         }
         
     }

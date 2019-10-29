@@ -21,6 +21,8 @@ namespace WebNote.Entities
         public string Email { get; set; }
         [Required, StringLength(500)]
         public string Password { get; set; }
+        [StringLength(30), ScaffoldColumn(false)]
+        public string ProfileImageFilename { get; set; }
         public bool IsActive { get; set; }
         [Required]
         public Guid ActivateGuid { get; set; }

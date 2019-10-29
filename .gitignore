@@ -1,0 +1,11 @@
+﻿################################################################################
+# This .gitignore file was automatically created by Microsoft(R) Visual Studio.
+################################################################################
+
+/.vs
+/WebNote/.vs
+/WebNote/packages
+/WebNote/WebNote.WebApp/bin
+/WebNote/WebNote.WebApp/obj/Debug
+/WebNote/WebNote.WebApp/Properties
+/WebNote/WebNote.WebApp/Web.Debug.config

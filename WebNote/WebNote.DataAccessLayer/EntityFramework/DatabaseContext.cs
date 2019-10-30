@@ -6,7 +6,7 @@ using System.Text;
 using System.Threading.Tasks;
 using WebNote.Entities;
 
-namespace WebNote.DataAccessLayer
+namespace WebNote.DataAccessLayer.EntityFramework
 {
     public class DatabaseContext : DbContext
     {

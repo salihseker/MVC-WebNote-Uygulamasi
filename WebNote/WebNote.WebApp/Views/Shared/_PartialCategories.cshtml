@@ -1,0 +1,17 @@
+﻿@using WebNote.Entities;
+@using WebNote.BusinessLayer;
+@{ 
+    CategoryManager cm = new CategoryManager();
+    List<Category> categories = cm.GetCategories();
+
+}
+<p class="lead">Kategoriler</p>
+<div class="list-group">
+    <a href="@Url.Action("Index","Home")" class="list-group-item"><span class="glyphicon glyphicon-arrow-right"></span> Tümü</a>
+    @foreach (Category cat in categories)
+    {
+    <a href="@Url.Action("Select","Category",new { id = cat.Id})" title="@cat.Description" class="list-group-item"><span class="glyphicon glyphicon-arrow-right"></span> @cat.Title</a>
+    }
+
+
+</div>

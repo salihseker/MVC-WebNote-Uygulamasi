@@ -11,8 +11,6 @@ namespace WebNote.WebApp.Controllers
         // GET: Home
         public ActionResult Index()
         {
-            WebNote.BusinessLayer.Test test = new BusinessLayer.Test();
-            test.test();
             return View();
         }
     }

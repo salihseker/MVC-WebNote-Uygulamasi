@@ -6,6 +6,7 @@ using System.Web.Mvc;
 using WebNote.Entities;
 using WebNote.BusinessLayer;
 using System.Net;
+using WebNote.WebApp.ViewModels;
 
 namespace WebNote.WebApp.Controllers
 {
@@ -16,7 +17,7 @@ namespace WebNote.WebApp.Controllers
         // GET: Home
         public ActionResult Index()
         {
-            return View(noteManager.GetAllNote());
+            return View(noteManager.GetAllNoteQueryable().OrderByDescending(x => x.ModifiedOn).ToList());
         }
 
         public ActionResult ByCategory(int? id)
@@ -32,7 +33,39 @@ namespace WebNote.WebApp.Controllers
                 return HttpNotFound();
             }
 
-            return View("Index" , cat.Notes.ToList());
+            return View("Index", cat.Notes.OrderByDescending(x => x.LikeCount).ToList());
+        }
+
+        public ActionResult MostLiked()
+        {
+            return View("Index", noteManager.GetAllNoteQueryable().OrderByDescending(x => x.LikeCount).ToList());
+        }
+
+        public ActionResult About()
+        {
+            return View();
+        }
+
+        public ActionResult Login()
+        {
+            return View();
+        }
+
+        [HttpPost]
+        public ActionResult Login(LoginViewModel model)
+        {
+            return View();
+        }
+
+        public ActionResult Register()
+        {
+            return View();
+        }
+
+        [HttpPost]
+        public ActionResult Register(RegisterViewModel model)
+        {
+            return View();
         }
     }
 }

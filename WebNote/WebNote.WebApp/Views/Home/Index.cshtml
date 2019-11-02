@@ -64,10 +64,10 @@
                                     @note.Owner.Username <span class="glyphicon glyphicon-user"></span><br />
                                     @note.ModifiedOn.ToString("dd.MM.yy HH:mm") <span class="glyphicon glyphicon-time"></span>
                                 </h6>
-                                @if (!string.IsNullOrEmpty(note.Text) && note.Text.Length > 70)
+                                @if (!string.IsNullOrEmpty(note.Text) && note.Text.Length > 60)
                                 {
                                 <p>
-                                    @(note.Text.Substring(0, 67) + "...")
+                                    @(note.Text.Substring(0, 57) + "...")
                                 </p>
                                 <p calss ="pull-right">
                                     <a href="#" class="btn btn-primary btn-xs"> Devamını Oku <span class="glyphicon glyphicon-chevron-right"></span></a>

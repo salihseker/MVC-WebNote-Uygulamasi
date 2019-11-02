@@ -1,4 +1,6 @@
-﻿
+﻿@using WebNote.Entities;
+@model List<Note>
+
 @{
     ViewBag.Title = "Index";
 }
@@ -9,8 +11,8 @@
     <div class="row">
         <!--Kategoriler-->
         <div class="col-md-3">
-           @Html.Partial("_PartialCategories");
-            
+            @Html.Partial("_PartialCategories");
+
         </div>
 
         <div class="col-md-9">
@@ -45,113 +47,68 @@
                 </div>
 
             </div>
-            <!--Yazılar-->
+            <!--Notlar-->
             <div class="row">
+                @foreach (Note note in Model)
+                {
+                    <div class="col-sm-4 col-lg-4 col-md-4" data-note-id="1">
+                        <div class="thumbnail">
+                            <img src="http://placehold.it/320x150" alt="@note.Title">
+                            <div class="caption">
+                                <h4>
+                                    <a href="#" data-toggle="modal" data-target="#modal_notedetail" data-note-id="1">
+                                        @note.Title
+                                    </a>
+                                </h4>
+                                <h6 class="text-right">
+                                    @note.Owner.Username <span class="glyphicon glyphicon-user"></span><br />
+                                    @note.ModifiedOn.ToString("dd.MM.yy HH:mm") <span class="glyphicon glyphicon-time"></span>
+                                </h6>
+                                @if (!string.IsNullOrEmpty(note.Text) && note.Text.Length > 70)
+                                {
+                                <p>
+                                    @(note.Text.Substring(0, 67) + "...")
+                                </p>
+                                <p calss ="pull-right">
+                                    <a href="#" class="btn btn-primary btn-xs"> Devamını Oku <span class="glyphicon glyphicon-chevron-right"></span></a>
+                                </p>
+                                }
+                                else
+                                {
+                                    <p>
+                                        @note.Text
+                                    </p>
+                                }
 
-                <div class="col-sm-4 col-lg-4 col-md-4" data-note-id="1">
-                    <div class="thumbnail">
-                        <img src="http://placehold.it/320x150" alt="test">
-                        <div class="caption">
-                            <h4>
-                                <a href="#" data-toggle="modal" data-target="#modal_notedetail" data-note-id="1">
-                                    Title
-                                </a>
-                            </h4>
-                            <h6 class="text-right">
-                                Username <span class="glyphicon glyphicon-user"></span><br />
-                                29.10.2019 16:02 <span class="glyphicon glyphicon-time"></span>
-                            </h6>
 
-                            This is a short description. Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-                        </div>
-                        <div>
-                            <hr />
-                        </div>
-                        <div class="ratings">
-                            <p class="pull-right">
-                                <button class="btn btn-default btn-sm" data-toggle="modal" data-target="#modal_comment" data-note-id="1">
-                                    <span class="glyphicon glyphicon-comment"></span> Yorumlar
-                                </button>
-                            </p>
-                            <p>
-                                <button class="btn btn-default btn-sm" type="button" data-liked="false" data-note-id="1">
-                                    <span class="glyphicon glyphicon-star-empty like-star"></span>&nbsp;
-                                    <span class="like-count">25</span>
-                                </button>
-                            </p>
+                            </div>
+
+
+                            <div>
+
+
+                                <hr />
+
+
+                            </div>
+
+
+                            <div class="ratings">
+                                <p class="pull-right">
+                                    <button class="btn btn-default btn-sm" data-toggle="modal" data-target="#modal_comment" data-note-id="1">
+                                        <span class="glyphicon glyphicon-comment"></span> Yorumlar
+                                    </button>
+                                </p>
+                                <p>
+                                    <button class="btn btn-default btn-sm" type="button" data-liked="false" data-note-id="1">
+                                        <span class="glyphicon glyphicon-star-empty like-star"></span>&nbsp;
+                                        <span class="like-count">@note.LikeCount</span>
+                                    </button>
+                                </p>
+                            </div>
                         </div>
                     </div>
-                </div>
-
-                <div class="col-sm-4 col-lg-4 col-md-4" data-note-id="1">
-                    <div class="thumbnail">
-                        <img src="http://placehold.it/320x150" alt="test">
-                        <div class="caption">
-                            <h4>
-                                <a href="#" data-toggle="modal" data-target="#modal_notedetail" data-note-id="1">
-                                    Title
-                                </a>
-                            </h4>
-                            <h6 class="text-right">
-                                Username <span class="glyphicon glyphicon-user"></span><br />
-                                29.10.2019 16:02 <span class="glyphicon glyphicon-time"></span>
-                            </h6>
-
-                            This is a short description. Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-                        </div>
-                        <div>
-                            <hr />
-                        </div>
-                        <div class="ratings">
-                            <p class="pull-right">
-                                <button class="btn btn-default btn-sm" data-toggle="modal" data-target="#modal_comment" data-note-id="1">
-                                    <span class="glyphicon glyphicon-comment"></span> Yorumlar
-                                </button>
-                            </p>
-                            <p>
-                                <button class="btn btn-default btn-sm" type="button" data-liked="false" data-note-id="1">
-                                    <span class="glyphicon glyphicon-star-empty like-star"></span>&nbsp;
-                                    <span class="like-count">25</span>
-                                </button>
-                            </p>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="col-sm-4 col-lg-4 col-md-4" data-note-id="1">
-                    <div class="thumbnail">
-                        <img src="http://placehold.it/320x150" alt="test">
-                        <div class="caption">
-                            <h4>
-                                <a href="#" data-toggle="modal" data-target="#modal_notedetail" data-note-id="1">
-                                    Title
-                                </a>
-                            </h4>
-                            <h6 class="text-right">
-                                Username <span class="glyphicon glyphicon-user"></span><br />
-                                29.10.2019 16:02 <span class="glyphicon glyphicon-time"></span>
-                            </h6>
-
-                            This is a short description. Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-                        </div>
-                        <div>
-                            <hr />
-                        </div>
-                        <div class="ratings">
-                            <p class="pull-right">
-                                <button class="btn btn-default btn-sm" data-toggle="modal" data-target="#modal_comment" data-note-id="1">
-                                    <span class="glyphicon glyphicon-comment"></span> Yorumlar
-                                </button>
-                            </p>
-                            <p>
-                                <button class="btn btn-default btn-sm" type="button" data-liked="false" data-note-id="1">
-                                    <span class="glyphicon glyphicon-star-empty like-star"></span>&nbsp;
-                                    <span class="like-count">25</span>
-                                </button>
-                            </p>
-                        </div>
-                    </div>
-                </div>
+                }
 
 
 
@@ -159,7 +116,7 @@
 
         </div>
 
-        </div>
-
     </div>
-    <!-- /.container -->
+
+</div>
+<!-- /.container -->

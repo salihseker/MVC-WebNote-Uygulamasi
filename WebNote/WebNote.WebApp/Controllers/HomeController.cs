@@ -57,7 +57,23 @@ namespace WebNote.WebApp.Controllers
         [HttpPost]
         public ActionResult Login(LoginViewModel model)
         {
-            return View();
+            if (ModelState.IsValid)
+            {
+                WebnoteUserManager wum = new WebnoteUserManager();
+                BusinessLayerResult<WebnoteUser> res = wum.LoginUser(model);
+
+                if (res.Errors.Count > 0)
+                {
+                       res.Errors.ForEach(x => ModelState.AddModelError("", x.Message));
+
+                    return View(model);
+                }
+
+                Session["login"] = res.Result; //session da kullanıcı bilgisi saklama
+                return RedirectToAction("Index");   // yönlendirme..
+            }
+
+                return View(model);
         }
 
         public ActionResult Register()

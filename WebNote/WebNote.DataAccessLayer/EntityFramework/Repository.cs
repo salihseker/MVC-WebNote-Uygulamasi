@@ -6,6 +6,7 @@ using System.Linq.Expressions;
 using System.Text;
 using System.Threading.Tasks;
 using WebNote.DataAccessLayer.Abstract;
+using WebNote.Entities;
 
 namespace WebNote.DataAccessLayer.EntityFramework
 {
@@ -36,16 +37,42 @@ namespace WebNote.DataAccessLayer.EntityFramework
         public int Insert(T obj)
         {
             _objectSet.Add(obj);
+            if (obj is EntityBase)
+            {
+                EntityBase o = obj as EntityBase;
+                DateTime now = DateTime.Now;
+
+                o.CreatedOn = now;
+                o.ModifiedOn = now;
+                o.ModifiedUsername = "system"; //TODO : İşlem yapan kullanıcı adı yazılmalı..
+            }
+
             return Save();
         }
 
         public int Update(T obj)
         {
+            if (obj is EntityBase)
+            {
+                EntityBase o = obj as EntityBase;
+                DateTime now = DateTime.Now;
+
+                o.ModifiedOn = now;
+                o.ModifiedUsername = "system"; //TODO : İşlem yapan kullanıcı adı yazılmalı..
+            }
             return Save();
         }
 
         public int Delete(T obj)
         {
+            //if (obj is EntityBase)
+            //{
+            //    EntityBase o = obj as EntityBase;
+            //    DateTime now = DateTime.Now;
+
+            //    o.ModifiedOn = now;
+            //    o.ModifiedUsername = "system"; //TODO : İşlem yapan kullanıcı adı yazılmalı..
+            //}
             _objectSet.Remove(obj);
             return Save();
         }

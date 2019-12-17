@@ -56,5 +56,29 @@ namespace WebNote.BusinessLayer
 
             return res;
         }
+
+        public BusinessLayerResult<WebnoteUser> LoginUser(LoginViewModel data)
+        {
+            // Giriş kontrolü
+            // Hesap aktive edilmiş mi?
+            Repository<WebnoteUser> repo_user = new Repository<WebnoteUser>();
+            BusinessLayerResult<WebnoteUser> res = new BusinessLayerResult<WebnoteUser>();
+            res.Result = repo_user.Find(x => x.Username == data.Username && x.Password == data.Password);
+
+            if (res.Result != null)
+            {
+                if (!res.Result.IsActive)
+                {
+                    res.AddError(ErrorMessageCode.UserIsNotActive, "Kullanıcı aktifleştirilmemiştir.");
+                    res.AddError(ErrorMessageCode.CheckYourEmail, "Lütfen e-posta adresinizi kontrol ediniz.");
+                }
+            }
+            else
+            {
+                res.AddError(ErrorMessageCode.UsernameOrPassWrong, "Kullanıcı adı yada şifre uyuşmuyor.");
+            }
+
+            return res;
+        }
     }
 }

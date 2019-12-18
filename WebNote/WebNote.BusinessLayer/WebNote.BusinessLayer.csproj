@@ -58,6 +58,10 @@
     <Compile Include="WebnoteUserManager.cs" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\WebNote.Common\WebNote.Common.csproj">
+      <Project>{4ac6f84b-5fca-4b51-81a1-c13162d0de8a}</Project>
+      <Name>WebNote.Common</Name>
+    </ProjectReference>
     <ProjectReference Include="..\WebNote.DataAccessLayer\WebNote.DataAccessLayer.csproj">
       <Project>{00ab3951-df17-4017-9844-54396fb5333a}</Project>
       <Name>WebNote.DataAccessLayer</Name>

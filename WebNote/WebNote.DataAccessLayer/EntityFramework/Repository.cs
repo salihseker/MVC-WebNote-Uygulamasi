@@ -5,6 +5,7 @@ using System.Linq;
 using System.Linq.Expressions;
 using System.Text;
 using System.Threading.Tasks;
+using WebNote.Common;
 using WebNote.DataAccessLayer.Abstract;
 using WebNote.Entities;
 
@@ -44,7 +45,7 @@ namespace WebNote.DataAccessLayer.EntityFramework
 
                 o.CreatedOn = now;
                 o.ModifiedOn = now;
-                o.ModifiedUsername = "system"; //TODO : İşlem yapan kullanıcı adı yazılmalı..
+                o.ModifiedUsername = App.Common.GetCurrentUsername();
             }
 
             return Save();
@@ -58,7 +59,7 @@ namespace WebNote.DataAccessLayer.EntityFramework
                 DateTime now = DateTime.Now;
 
                 o.ModifiedOn = now;
-                o.ModifiedUsername = "system"; //TODO : İşlem yapan kullanıcı adı yazılmalı..
+                o.ModifiedUsername = App.Common.GetCurrentUsername();
             }
             return Save();
         }

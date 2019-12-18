@@ -171,6 +171,7 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Init\WebCommon.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -205,6 +206,10 @@
     <ProjectReference Include="..\WebNote.BusinessLayer\WebNote.BusinessLayer.csproj">
       <Project>{5b3de81d-4efe-4a0e-90fd-afc24ddc8622}</Project>
       <Name>WebNote.BusinessLayer</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\WebNote.Common\WebNote.Common.csproj">
+      <Project>{4AC6F84B-5FCA-4B51-81A1-C13162D0DE8A}</Project>
+      <Name>WebNote.Common</Name>
     </ProjectReference>
     <ProjectReference Include="..\WebNote.Entities\WebNote.Entities.csproj">
       <Project>{7e13999c-8ab8-4aa4-8765-c136a059d08a}</Project>

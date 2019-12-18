@@ -4,6 +4,8 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using System.Web.Routing;
+using WebNote.Common;
+using WebNote.WebApp.Init;
 
 namespace WebNote.WebApp
 {
@@ -13,6 +15,11 @@ namespace WebNote.WebApp
         {
             AreaRegistration.RegisterAllAreas();
             RouteConfig.RegisterRoutes(RouteTable.Routes);
+
+            App.Common = new WebCommon();
         }
+
+        
     }
+     
 }

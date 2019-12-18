@@ -119,5 +119,20 @@ namespace WebNote.WebApp.Controllers
         {
             return View();
         }
+
+        public ActionResult UserActivate(Guid activate_id)
+        {
+            return View();
+        }
+
+        public ActionResult Logout()
+        {
+            Session.Clear();
+            Session.Abandon();
+            return RedirectToAction(nameof(Index));
+        }
+
+
+
     }
 }

@@ -8,6 +8,7 @@ using WebNote.Entities.ValueObjects;
 using WebNote.DataAccessLayer.EntityFramework;
 using WebNote.BusinessLayer.Results;
 using WebNote.Entities.Messages;
+using WebNote.Common.Helpers;
 
 namespace WebNote.BusinessLayer
 {
@@ -51,6 +52,12 @@ namespace WebNote.BusinessLayer
                 if (dbResult > 0)
                 {
                     res.Result = repo_user.Find(x => x.Email == data.EMail && x.Username == data.Username);
+
+                    string siteUri = ConfigHelper.Get<string>("SiteRootUri");
+                    string activateUri = $"{siteUri}/Home/UserActivate/{res.Result.ActivateGuid}";
+                    string body = $"Merhaba {res.Result.Username};<br><br>Hesabınızı aktifleştirmek için <a href='{activateUri}' target='_blank'>tıklayınız</a>.";
+
+                    MailHelper.SendMail(body, res.Result.Email, "WebNote Hesap Aktifleştirme");
                 }
             }
 
@@ -76,6 +83,31 @@ namespace WebNote.BusinessLayer
             else
             {
                 res.AddError(ErrorMessageCode.UsernameOrPassWrong, "Kullanıcı adı yada şifre uyuşmuyor.");
+            }
+
+            return res;
+        }
+
+        public BusinessLayerResult<WebnoteUser> ActivateUser(Guid activateId)
+        {
+            Repository<WebnoteUser> repo_user = new Repository<WebnoteUser>();
+            BusinessLayerResult<WebnoteUser> res = new BusinessLayerResult<WebnoteUser>();
+            res.Result = repo_user.Find(x => x.ActivateGuid == activateId);
+
+            if (res.Result != null)
+            {
+                if (res.Result.IsActive)
+                {
+                    res.AddError(ErrorMessageCode.UserAlreadyActive, "Kullanıcı zaten aktif edilmiştir.");
+                    return res;
+                }
+
+                res.Result.IsActive = true;
+                repo_user.Update(res.Result);
+            }
+            else
+            {
+                res.AddError(ErrorMessageCode.ActivateIdDoesNotExists, "Aktifleştirilecek kullanıcı bulunamadı.");
             }
 
             return res;

@@ -10,6 +10,8 @@ using WebNote.Entities.ValueObjects;
 using System.Web.ModelBinding;
 using WebNote.BusinessLayer.Results;
 using WebNote.Entities.Messages;
+using WebNote.WebApp.ViewModels;
+using WebNote.WebApp.Models;
 
 namespace WebNote.WebApp.Controllers
 {
@@ -62,15 +64,19 @@ namespace WebNote.WebApp.Controllers
                 WebnoteUserManager wum = new WebnoteUserManager();
                 BusinessLayerResult<WebnoteUser> res = wum.LoginUser(model);
 
+    
+
+                CurrentSession.Set<WebnoteUser>("login", res.Result); //session da kullanıcı bilgisi saklama
                 if (res.Errors.Count > 0)
                 {
-                       res.Errors.ForEach(x => ModelState.AddModelError("", x.Message));
+                    ErrorViewModel errorNotifyObj = new ErrorViewModel()
+                    {
+                        Title = "Geçersiz İşlem",
+                        Items = res.Errors
+                    };
 
-                    return View(model);
-                }
-
-                Session["login"] = res.Result; //session da kullanıcı bilgisi saklama
-                return RedirectToAction("Index");   // yönlendirme..
+                    return View("Error", errorNotifyObj);
+                }   // yönlendirme..
             }
 
                 return View(model);
@@ -120,15 +126,38 @@ namespace WebNote.WebApp.Controllers
             return View();
         }
 
-        public ActionResult UserActivate(Guid activate_id)
+
+        public ActionResult UserActivate(Guid id)
         {
-            return View();
+            WebnoteUserManager wum = new WebnoteUserManager();
+            BusinessLayerResult<WebnoteUser> res = wum.ActivateUser(id);
+
+            if (res.Errors.Count > 0)
+            {
+                ErrorViewModel errorNotifyObj = new ErrorViewModel()
+                {
+                    Title = "Geçersiz İşlem",
+                    Items = res.Errors
+                };
+
+                return View("Error", errorNotifyObj);
+            }
+
+            OkViewModel okNotifyObj = new OkViewModel()
+            {
+                Title = "Hesap Aktifleştirildi",
+                RedirectingUrl = "/Home/Login"
+            };
+
+            okNotifyObj.Items.Add("Hesabınız aktifleştirildi. Artık not paylaşabilir ve beğenme yapabilirsiniz.");
+
+            return View("Ok", okNotifyObj);
         }
 
         public ActionResult Logout()
         {
-            Session.Clear();
-            Session.Abandon();
+            CurrentSession.Clear();
+            CurrentSession.Abandon();
             return RedirectToAction(nameof(Index));
         }
 

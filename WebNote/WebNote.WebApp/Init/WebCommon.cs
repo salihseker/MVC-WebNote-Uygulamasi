@@ -18,7 +18,7 @@ namespace WebNote.WebApp.Init
                 return user.Username;
             }
 
-            return null;
+            return "system";
             
         }
     }

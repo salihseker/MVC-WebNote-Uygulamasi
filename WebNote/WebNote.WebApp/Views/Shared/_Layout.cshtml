@@ -1,4 +1,8 @@
-﻿<!DOCTYPE html>
+﻿@using WebNote.WebApp
+@using WebNote.Entities
+@using WebNote.WebApp.Models
+
+<!DOCTYPE html>
 <html lang="en">
 
 <head>
@@ -37,9 +41,13 @@
             <!-- Collect the nav links, forms, and oth er content for toggling -->
             <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
                 <ul class="nav navbar-nav">
-                    <li>
-                        <a href="#"><span class="glyphicon glyphicon-wrench"></span> Yönetim</a>
-                    </li>
+                    @if (CurrentSession.User != null)
+                    {
+                        <li>
+                            <a href="#"><span class="glyphicon glyphicon-wrench"></span> Yönetim</a>
+                        </li>
+                    }
+
                     <li>
                         <a href="/Home/MostLiked"><span class="glyphicon glyphicon-star"></span> En Beğenilenler</a>
                     </li>
@@ -52,26 +60,34 @@
 
                 </ul>
                 <ul class="nav navbar-nav navbar-right">
-                    <li>
-                        <a href="/Home/Login">
-                            <span class="glyphicon glyphicon-log-in"> Giriş
-                        </a>
-                    </li>
-                    <li>
-                        <a href="/Home/Register">
-                            <span class="glyphicon glyphicon-user"> Üye Ol
-                        </a>
-                    </li>
-                    <li>
-                        <a href="#">
-                            <span class="glyphicon glyphicon-user"> salihseker
-                        </a>
-                    </li>
-                    <li>
-                        <a href="#">
-                            <span class="glyphicon glyphicon-log-out"> Çıkış
-                        </a>
-                    </li>
+                    @if (CurrentSession.User == null)
+                    {
+                        <li>
+                            <a href="/Home/Login">
+                                <span class="glyphicon glyphicon-log-in"> Giriş
+                            </a>
+                        </li>
+                        <li>
+                            <a href="/Home/Register">
+                                <span class="glyphicon glyphicon-user"> Üye Ol
+                            </a>
+                        </li>
+                    }
+                    else
+                    {
+                        <li>
+                            <a href="#">
+                                <span class="glyphicon glyphicon-user"> @CurrentSession.User.Username
+</a>
+                        </li>
+                        <li>
+                            <a href="/Home/Logout">
+                                <span class="glyphicon glyphicon-log-out"> Çıkış
+                            </a>
+                        </li>
+                    }
+
+
                 </ul>
             </div>
             <!-- /.navbar-collapse -->

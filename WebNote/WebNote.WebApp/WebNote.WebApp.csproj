@@ -110,6 +110,7 @@
     <Content Include="Content\validation-summary.css" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
+    <Content Include="Images\user_boy.png" />
     <Content Include="index.html" />
     <Content Include="Scripts\bootstrap.bundle.js" />
     <Content Include="Scripts\bootstrap.bundle.min.js" />
@@ -192,6 +193,8 @@
     <Content Include="Views\Home\RegisterOk.cshtml" />
     <Content Include="Views\Shared\Ok.cshtml" />
     <Content Include="Views\Shared\Error.cshtml" />
+    <Content Include="Views\Home\ShowProfile.cshtml" />
+    <Content Include="Views\Home\EditProfile.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

@@ -19,6 +19,7 @@ namespace WebNote.WebApp.Controllers
     {
         private NoteManager noteManager = new NoteManager();
         private CategoryManager categoryManager = new CategoryManager();
+        private WebnoteUserManager webnoteUserManager = new WebnoteUserManager();
         // GET: Home
         public ActionResult Index()
         {
@@ -61,8 +62,7 @@ namespace WebNote.WebApp.Controllers
         {
             if (ModelState.IsValid)
             {
-                WebnoteUserManager wum = new WebnoteUserManager();
-                BusinessLayerResult<WebnoteUser> res = wum.LoginUser(model);
+                BusinessLayerResult<WebnoteUser> res = webnoteUserManager.LoginUser(model);
 
     
 
@@ -126,11 +126,12 @@ namespace WebNote.WebApp.Controllers
             return View();
         }
 
+      
+
 
         public ActionResult UserActivate(Guid id)
         {
-            WebnoteUserManager wum = new WebnoteUserManager();
-            BusinessLayerResult<WebnoteUser> res = wum.ActivateUser(id);
+            BusinessLayerResult<WebnoteUser> res = webnoteUserManager.ActivateUser(id);
 
             if (res.Errors.Count > 0)
             {
@@ -154,11 +155,111 @@ namespace WebNote.WebApp.Controllers
             return View("Ok", okNotifyObj);
         }
 
+        
+
         public ActionResult Logout()
         {
             CurrentSession.Clear();
             CurrentSession.Abandon();
             return RedirectToAction(nameof(Index));
+        }
+
+        public ActionResult ShowProfile()
+        {
+            BusinessLayerResult<WebnoteUser> res = webnoteUserManager.GetUserById(CurrentSession.User.Id);
+
+            if (res.Errors.Count > 0)
+            {
+                ErrorViewModel errorNotifyObj = new ErrorViewModel()
+                {
+                    Title = "Hata Oluştu",
+                    Items = res.Errors
+                };
+
+                return View("Error", errorNotifyObj);
+            }
+
+            return View(res.Result);
+        }
+
+        public ActionResult EditProfile()
+        {
+            BusinessLayerResult<WebnoteUser> res = webnoteUserManager.GetUserById(CurrentSession.User.Id);
+
+            if (res.Errors.Count > 0)
+            {
+                ErrorViewModel errorNotifyObj = new ErrorViewModel()
+                {
+                    Title = "Hata Oluştu",
+                    Items = res.Errors
+                };
+
+                return View("Error", errorNotifyObj);
+            }
+
+            return View(res.Result);
+        }
+
+        [HttpPost]
+        public ActionResult EditProfile(WebnoteUser model, HttpPostedFileBase ProfileImage)
+        {
+            ModelState.Remove("ModifiedUsername");
+
+            if (ModelState.IsValid)
+            {
+                if (ProfileImage != null &&
+                    (ProfileImage.ContentType == "image/jpeg" ||
+                    ProfileImage.ContentType == "image/jpg" ||
+                    ProfileImage.ContentType == "image/png"))
+                {
+                    string filename = $"user_{model.Id}.{ProfileImage.ContentType.Split('/')[1]}";
+
+                    ProfileImage.SaveAs(Server.MapPath($"~/images/{filename}"));
+                    model.ProfileImageFilename = filename;
+                }
+
+                BusinessLayerResult<WebnoteUser> res = webnoteUserManager.UpdateProfile(model);
+
+                if (res.Errors.Count > 0)
+                {
+                    ErrorViewModel errorNotifyObj = new ErrorViewModel()
+                    {
+                        Items = res.Errors,
+                        Title = "Profil Güncellenemedi.",
+                        RedirectingUrl = "/Home/EditProfile"
+                    };
+
+                    return View("Error", errorNotifyObj);
+                }
+
+                // Profil güncellendiği için session güncellendi.
+                CurrentSession.Set<WebnoteUser>("login", res.Result);
+
+                return RedirectToAction("ShowProfile");
+            }
+
+            return View(model);
+        }
+
+        public ActionResult DeleteProfile()
+        {
+            BusinessLayerResult<WebnoteUser> res = webnoteUserManager.RemoveUserById(CurrentSession.User.Id);
+
+            if (res.Errors.Count > 0)
+            {
+                ErrorViewModel errorNotifyObj = new ErrorViewModel()
+                {
+                    Items = res.Errors,
+                    Title = "Profil Silinemedi.",
+                    RedirectingUrl = "/Home/ShowProfile"
+                };
+
+                return View("Error", errorNotifyObj);
+            }
+
+            CurrentSession.Clear();
+
+            return RedirectToAction("Index");
         }
 
 

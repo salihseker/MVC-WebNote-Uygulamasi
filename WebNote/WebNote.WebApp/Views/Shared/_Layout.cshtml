@@ -43,8 +43,63 @@
                 <ul class="nav navbar-nav">
                     @if (CurrentSession.User != null)
                     {
-                        <li>
-                            <a href="#"><span class="glyphicon glyphicon-wrench"></span> Yönetim</a>
+
+                        <li class="dropdown">
+                            <a href="/Note/MyNotes" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
+                                <span class="glyphicon glyphicon-wrench"></span> Yönetim <span class="caret"></span>
+                            </a>
+                            <ul class="dropdown-menu">
+                                <li>
+                                    <a href="/Note/Create">
+                                        <span class="glyphicon glyphicon-plus"> Not Ekle</span>
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="/Note/Index">
+                                        <span class="glyphicon glyphicon-th-list"> Notlarım</span>
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="/Note/MyLikedNotes">
+                                        <span class="glyphicon glyphicon-heart"> Beğendiklerim</span>
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="/Home/ShowProfile">
+                                        <span class="glyphicon glyphicon-user"> Profil Göster</span>
+                                    </a>
+                                <li>
+                                    <a href="/Home/ShowProfile">
+                                        <span class="glyphicon glyphicon-user"> Profil Göster</span>
+                                    </a>
+                                </li>
+
+                                @if (CurrentSession.User.IsAdmin)
+                                {
+                                    <li role="separator" class="divider"></li>
+                                    <li>
+                                        <a href="/Category/Create">
+                                            <span class="glyphicon glyphicon-plus"> Kategori Ekle</span>
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a href="/Category/Index">
+                                            <span class="glyphicon glyphicon-th-list"> Kategoriler</span>
+                                        </a>
+                                    </li>
+                                    <li role="separator" class="divider"></li>
+                                    <li>
+                                        <a href="/EvernoteUser/Create">
+                                            <span class="glyphicon glyphicon-plus"> Kullanıcı Ekle</span>
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a href="/EvernoteUser/Index">
+                                            <span class="glyphicon glyphicon-th-list"> Kullanıcılar</span>
+                                        </a>
+                                    </li>
+                                }
+                            </ul>
                         </li>
                     }
 
@@ -77,13 +132,37 @@
                     {
                         <li>
                             <a href="/Home/ShowProfile">
-                                <span class="glyphicon glyphicon-user"> @CurrentSession.User.Username
-</a>
+                                <span class="glyphicon glyphicon-user"> @CurrentSession.User.Username</span>
+                            </a>
                         </li>
                         <li>
                             <a href="/Home/Logout">
-                                <span class="glyphicon glyphicon-log-out"> Çıkış
+                                <span class="glyphicon glyphicon-log-out"> Çıkış</span>
                             </a>
+                        </li>
+
+                        <li class="dropdown">
+                            <a href="/Home/ShowProfile" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
+                                <span class="glyphicon glyphicon-user"></span> @CurrentSession.User.Username <span class="caret"></span>
+                            </a>
+                            <ul class="dropdown-menu">
+                                <li>
+                                    <a href="/Home/ShowProfile">
+                                        <span class="glyphicon glyphicon-user"> Profil Göster</span>
+                                    </a>
+                                </li>
+                                <li role="separator" class="divider"></li>
+                                <li>
+                                    <a href="/Home/EditProfile">
+                                        <span class="glyphicon glyphicon-user"> Profil Düzenle</span>
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="/Home/DeleteProfile" onclick="return confirm('Hesabınızı silmek istediğinize emin misiniz?');">
+                                        <span class="glyphicon glyphicon-trash"></span> Profili Sil
+                                    </a>
+                                </li>
+                            </ul>
                         </li>
                     }
 

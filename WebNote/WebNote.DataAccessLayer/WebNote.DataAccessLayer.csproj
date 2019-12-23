@@ -54,7 +54,6 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Abstract\IRepository.cs" />
     <Compile Include="EntityFramework\DatabaseContext.cs" />
     <Compile Include="EntityFramework\DbInitializer.cs" />
     <Compile Include="EntityFramework\Repository.cs" />
@@ -70,10 +69,17 @@
       <Project>{4ac6f84b-5fca-4b51-81a1-c13162d0de8a}</Project>
       <Name>WebNote.Common</Name>
     </ProjectReference>
+    <ProjectReference Include="..\WebNote.Core\WebNote.Core.csproj">
+      <Project>{a293a744-8dab-4db2-8bea-804c2fe7ace6}</Project>
+      <Name>WebNote.Core</Name>
+    </ProjectReference>
     <ProjectReference Include="..\WebNote.Entities\WebNote.Entities.csproj">
       <Project>{7e13999c-8ab8-4aa4-8765-c136a059d08a}</Project>
       <Name>WebNote.Entities</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Abstract\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">

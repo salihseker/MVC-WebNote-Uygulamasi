@@ -3,15 +3,13 @@ using System.Collections.Generic;
 using System.Data.Entity;
 using System.Linq;
 using System.Linq.Expressions;
-using System.Text;
-using System.Threading.Tasks;
 using WebNote.Common;
-using WebNote.DataAccessLayer.Abstract;
 using WebNote.Entities;
+using WebNote.Core.DataAccess;
 
 namespace WebNote.DataAccessLayer.EntityFramework
 {
-    public class Repository<T>: RepositoryBase, IRepository<T> where T : class
+    public class Repository<T> : RepositoryBase, IDataAccess<T> where T : class
     {
         private DbSet<T> _objectSet;
 

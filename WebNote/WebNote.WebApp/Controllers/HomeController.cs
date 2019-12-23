@@ -23,7 +23,7 @@ namespace WebNote.WebApp.Controllers
         // GET: Home
         public ActionResult Index()
         {
-            return View(noteManager.GetAllNoteQueryable().OrderByDescending(x => x.ModifiedOn).ToList());
+            return View(noteManager.ListQueryable().OrderByDescending(x => x.ModifiedOn).ToList());
         }
 
         public ActionResult ByCategory(int? id)
@@ -44,7 +44,7 @@ namespace WebNote.WebApp.Controllers
 
         public ActionResult MostLiked()
         {
-            return View("Index", noteManager.GetAllNoteQueryable().OrderByDescending(x => x.LikeCount).ToList());
+            return View("Index", noteManager.ListQueryable().OrderByDescending(x => x.LikeCount).ToList());
         }
 
         public ActionResult About()

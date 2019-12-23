@@ -2,12 +2,10 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Linq.Expressions;
-using System.Text;
-using System.Threading.Tasks;
 
-namespace WebNote.DataAccessLayer.Abstract
+namespace WebNote.Core.DataAccess
 {
-    interface IRepository<T>
+    public interface IDataAccess<T>
     {
         List<T> List();
         IQueryable<T> ListQueryable();

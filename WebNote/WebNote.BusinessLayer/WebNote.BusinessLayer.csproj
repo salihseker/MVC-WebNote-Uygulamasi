@@ -51,6 +51,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Abstract\ManagerBase.cs" />
     <Compile Include="CategoryManager.cs" />
     <Compile Include="NoteManager.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -61,6 +62,10 @@
     <ProjectReference Include="..\WebNote.Common\WebNote.Common.csproj">
       <Project>{4ac6f84b-5fca-4b51-81a1-c13162d0de8a}</Project>
       <Name>WebNote.Common</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\WebNote.Core\WebNote.Core.csproj">
+      <Project>{a293a744-8dab-4db2-8bea-804c2fe7ace6}</Project>
+      <Name>WebNote.Core</Name>
     </ProjectReference>
     <ProjectReference Include="..\WebNote.DataAccessLayer\WebNote.DataAccessLayer.csproj">
       <Project>{00ab3951-df17-4017-9844-54396fb5333a}</Project>

@@ -168,12 +168,14 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="App_Start\RouteConfig.cs" />
+    <Compile Include="Controllers\CategoryController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Init\WebCommon.cs" />
     <Compile Include="Models\CurrentSession.cs" />
+    <Compile Include="Models\WebNoteWebAppContext.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="ViewModels\ErrorViewModel.cs" />
     <Compile Include="ViewModels\InfoViewModel.cs" />
@@ -195,6 +197,11 @@
     <Content Include="Views\Shared\Error.cshtml" />
     <Content Include="Views\Home\ShowProfile.cshtml" />
     <Content Include="Views\Home\EditProfile.cshtml" />
+    <Content Include="Views\Category\Create.cshtml" />
+    <Content Include="Views\Category\Delete.cshtml" />
+    <Content Include="Views\Category\Details.cshtml" />
+    <Content Include="Views\Category\Edit.cshtml" />
+    <Content Include="Views\Category\Index.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
@@ -219,6 +226,10 @@
     <ProjectReference Include="..\WebNote.Common\WebNote.Common.csproj">
       <Project>{4AC6F84B-5FCA-4B51-81A1-C13162D0DE8A}</Project>
       <Name>WebNote.Common</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\WebNote.Core\WebNote.Core.csproj">
+      <Project>{a293a744-8dab-4db2-8bea-804c2fe7ace6}</Project>
+      <Name>WebNote.Core</Name>
     </ProjectReference>
     <ProjectReference Include="..\WebNote.Entities\WebNote.Entities.csproj">
       <Project>{7e13999c-8ab8-4aa4-8765-c136a059d08a}</Project>

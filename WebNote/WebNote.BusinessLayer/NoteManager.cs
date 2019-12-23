@@ -5,22 +5,12 @@ using System.Text;
 using System.Threading.Tasks;
 using WebNote.Entities;
 using WebNote.DataAccessLayer.EntityFramework;
+using WebNote.BusinessLayer.Abstract;
 
 namespace WebNote.BusinessLayer
 {
-    public class NoteManager
+    public class NoteManager:ManagerBase<Note>
     {
-        private Repository<Note> repo_note = new Repository<Note>();
-
-        public List<Note> GetAllNote()
-        {
-            return repo_note.List();
-        }
-
-        public IQueryable<Note> GetAllNoteQueryable()
-        {
-            return repo_note.ListQueryable();
-        }
 
     }
 }

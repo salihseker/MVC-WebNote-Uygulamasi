@@ -9,19 +9,19 @@ using WebNote.DataAccessLayer.EntityFramework;
 using WebNote.BusinessLayer.Results;
 using WebNote.Entities.Messages;
 using WebNote.Common.Helpers;
+using WebNote.BusinessLayer.Abstract;
 
 namespace WebNote.BusinessLayer
 {
-    public class WebnoteUserManager
+    public class WebnoteUserManager: ManagerBase<WebnoteUser>
     {
-        private Repository<WebnoteUser> repo_user = new Repository<WebnoteUser>();
         public BusinessLayerResult<WebnoteUser> RegisterUser(RegisterViewModel data)
         {
             // Kullanıcı username kontrolü..
             // Kullanıcı e-posta kontrolü..
             // Kayıt işlemi..
             // Aktivasyon e-postası gönderimi.
-            WebnoteUser user = repo_user.Find(x => x.Username == data.Username || x.Email == data.EMail);
+            WebnoteUser user = Find(x => x.Username == data.Username || x.Email == data.EMail);
             BusinessLayerResult<WebnoteUser> res = new BusinessLayerResult<WebnoteUser>();
 
             if (user != null)
@@ -38,7 +38,7 @@ namespace WebNote.BusinessLayer
             }
             else
             {
-                int dbResult = repo_user.Insert(new WebnoteUser()
+                int dbResult = Insert(new WebnoteUser()
                 {
                     Username = data.Username,
                     Email = data.EMail,
@@ -51,7 +51,7 @@ namespace WebNote.BusinessLayer
 
                 if (dbResult > 0)
                 {
-                    res.Result = repo_user.Find(x => x.Email == data.EMail && x.Username == data.Username);
+                    res.Result = Find(x => x.Email == data.EMail && x.Username == data.Username);
 
                     string siteUri = ConfigHelper.Get<string>("SiteRootUri");
                     string activateUri = $"{siteUri}/Home/UserActivate/{res.Result.ActivateGuid}";
@@ -69,7 +69,7 @@ namespace WebNote.BusinessLayer
             // Giriş kontrolü
             // Hesap aktive edilmiş mi?
             BusinessLayerResult<WebnoteUser> res = new BusinessLayerResult<WebnoteUser>();
-            res.Result = repo_user.Find(x => x.Username == data.Username && x.Password == data.Password);
+            res.Result = Find(x => x.Username == data.Username && x.Password == data.Password);
 
             if (res.Result != null)
             {
@@ -91,7 +91,7 @@ namespace WebNote.BusinessLayer
         {
             
             BusinessLayerResult<WebnoteUser> res = new BusinessLayerResult<WebnoteUser>();
-            res.Result = repo_user.Find(x => x.ActivateGuid == activateId);
+            res.Result = Find(x => x.ActivateGuid == activateId);
 
             if (res.Result != null)
             {
@@ -102,7 +102,7 @@ namespace WebNote.BusinessLayer
                 }
 
                 res.Result.IsActive = true;
-                repo_user.Update(res.Result);
+                Update(res.Result);
             }
             else
             {
@@ -115,7 +115,7 @@ namespace WebNote.BusinessLayer
         public BusinessLayerResult<WebnoteUser> GetUserById(int id)
         {
             BusinessLayerResult<WebnoteUser> res = new BusinessLayerResult<WebnoteUser>();
-            res.Result = repo_user.Find(x => x.Id == id);
+            res.Result = Find(x => x.Id == id);
 
             if (res.Result == null)
             {
@@ -128,11 +128,11 @@ namespace WebNote.BusinessLayer
         public BusinessLayerResult<WebnoteUser> RemoveUserById(int id)
         {
             BusinessLayerResult<WebnoteUser> res = new BusinessLayerResult<WebnoteUser>();
-            WebnoteUser user = repo_user.Find(x => x.Id == id);
+            WebnoteUser user = Find(x => x.Id == id);
 
             if (user != null)
             {
-                if (repo_user.Delete(user) == 0)
+                if (Delete(user) == 0)
                 {
                     res.AddError(ErrorMessageCode.UserCouldNotRemove, "Kullanıcı silinemedi.");
                     return res;
@@ -148,7 +148,7 @@ namespace WebNote.BusinessLayer
 
         public BusinessLayerResult<WebnoteUser> UpdateProfile(WebnoteUser data)
         {
-            WebnoteUser db_user = repo_user.Find(x => x.Id != data.Id && (x.Username == data.Username || x.Email == data.Email));
+            WebnoteUser db_user = Find(x => x.Id != data.Id && (x.Username == data.Username || x.Email == data.Email));
             BusinessLayerResult<WebnoteUser> res = new BusinessLayerResult<WebnoteUser>();
 
             if (db_user != null && db_user.Id != data.Id)
@@ -166,7 +166,7 @@ namespace WebNote.BusinessLayer
                 return res;
             }
 
-            res.Result = repo_user.Find(x => x.Id == data.Id);
+            res.Result = Find(x => x.Id == data.Id);
             res.Result.Email = data.Email;
             res.Result.Name = data.Name;
             res.Result.Surname = data.Surname;
@@ -178,7 +178,7 @@ namespace WebNote.BusinessLayer
                 res.Result.ProfileImageFilename = data.ProfileImageFilename;
             }
 
-            if (repo_user.Update(res.Result) == 0)
+            if (Update(res.Result) == 0)
             {
                 res.AddError(ErrorMessageCode.ProfileCouldNotUpdated, "Profil güncellenemedi.");
             }

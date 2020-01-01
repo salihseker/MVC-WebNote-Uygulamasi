@@ -36,7 +36,7 @@
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </button>
-                <a class="navbar-brand" href="#">WebNote</a>
+                <a class="navbar-brand" href="~/Home/Index">WebNote</a>
             </div>
             <!-- Collect the nav links, forms, and oth er content for toggling -->
             <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
@@ -45,31 +45,31 @@
                     {
 
                         <li class="dropdown">
-                            <a href="/Note/MyNotes" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
+                            <a href="~/Note/MyNotes" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
                                 <span class="glyphicon glyphicon-wrench"></span> Yönetim <span class="caret"></span>
                             </a>
                             <ul class="dropdown-menu">
                                 <li>
-                                    <a href="/Note/Create">
+                                    <a href="~/Note/Create">
                                         <span class="glyphicon glyphicon-plus"> Not Ekle</span>
                                     </a>
                                 </li>
                                 <li>
-                                    <a href="/Note/Index">
+                                    <a href="~/Note/Index">
                                         <span class="glyphicon glyphicon-th-list"> Notlarım</span>
                                     </a>
                                 </li>
                                 <li>
-                                    <a href="/Note/MyLikedNotes">
+                                    <a href="~/Note/MyLikedNotes">
                                         <span class="glyphicon glyphicon-heart"> Beğendiklerim</span>
                                     </a>
                                 </li>
                                 <li>
-                                    <a href="/Home/ShowProfile">
+                                    <a href="~/Home/ShowProfile">
                                         <span class="glyphicon glyphicon-user"> Profil Göster</span>
                                     </a>
                                 <li>
-                                    <a href="/Home/ShowProfile">
+                                    <a href="~/Home/ShowProfile">
                                         <span class="glyphicon glyphicon-user"> Profil Göster</span>
                                     </a>
                                 </li>
@@ -78,23 +78,23 @@
                                 {
                                     <li role="separator" class="divider"></li>
                                     <li>
-                                        <a href="/Category/Create">
+                                        <a href="~/Category/Create">
                                             <span class="glyphicon glyphicon-plus"> Kategori Ekle</span>
                                         </a>
                                     </li>
                                     <li>
-                                        <a href="/Category/Index">
+                                        <a href="~/Category/Index">
                                             <span class="glyphicon glyphicon-th-list"> Kategoriler</span>
                                         </a>
                                     </li>
                                     <li role="separator" class="divider"></li>
                                     <li>
-                                        <a href="/EvernoteUser/Create">
+                                        <a href="~/EvernoteUser/Create">
                                             <span class="glyphicon glyphicon-plus"> Kullanıcı Ekle</span>
                                         </a>
                                     </li>
                                     <li>
-                                        <a href="/EvernoteUser/Index">
+                                        <a href="~/EvernoteUser/Index">
                                             <span class="glyphicon glyphicon-th-list"> Kullanıcılar</span>
                                         </a>
                                     </li>
@@ -104,13 +104,13 @@
                     }
 
                     <li>
-                        <a href="/Home/MostLiked"><span class="glyphicon glyphicon-star"></span> En Beğenilenler</a>
+                        <a href="~/Home/MostLiked"><span class="glyphicon glyphicon-star"></span> En Beğenilenler</a>
                     </li>
                     <li>
-                        <a href="/Home/Index"><span class="glyphicon glyphicon-th-list"></span> Son Yazılanlar</a>
+                        <a href="~/Home/Index"><span class="glyphicon glyphicon-th-list"></span> Son Yazılanlar</a>
                     </li>
                     <li>
-                        <a href="/Home/About"><span class="glyphicon glyphicon-info-sign"></span> Hakkımızda</a>
+                        <a href="~/Home/About"><span class="glyphicon glyphicon-info-sign"></span> Hakkımızda</a>
                     </li>
 
                 </ul>
@@ -118,12 +118,12 @@
                     @if (CurrentSession.User == null)
                     {
                         <li>
-                            <a href="/Home/Login">
+                            <a href="~/Home/Login">
                                 <span class="glyphicon glyphicon-log-in"> Giriş</span>
                             </a>
                         </li>
                         <li>
-                            <a href="/Home/Register">
+                            <a href="~/Home/Register">
                                 <span class="glyphicon glyphicon-user"> Üye Ol</span>
                             </a>
                         </li>
@@ -131,34 +131,34 @@
                     else
                     {
                         <li>
-                            <a href="/Home/ShowProfile">
+                            <a href="~/Home/ShowProfile">
                                 <span class="glyphicon glyphicon-user"> @CurrentSession.User.Username</span>
                             </a>
                         </li>
                         <li>
-                            <a href="/Home/Logout">
+                            <a href="~/Home/Logout">
                                 <span class="glyphicon glyphicon-log-out"> Çıkış</span>
                             </a>
                         </li>
 
                         <li class="dropdown">
-                            <a href="/Home/ShowProfile" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
+                            <a href="~/Home/ShowProfile" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
                                 <span class="glyphicon glyphicon-user"></span> @CurrentSession.User.Username <span class="caret"></span>
                             </a>
                             <ul class="dropdown-menu">
                                 <li>
-                                    <a href="/Home/ShowProfile">
+                                    <a href="~/Home/ShowProfile">
                                         <span class="glyphicon glyphicon-user"> Profil Göster</span>
                                     </a>
                                 </li>
                                 <li role="separator" class="divider"></li>
                                 <li>
-                                    <a href="/Home/EditProfile">
+                                    <a href="~/Home/EditProfile">
                                         <span class="glyphicon glyphicon-user"> Profil Düzenle</span>
                                     </a>
                                 </li>
                                 <li>
-                                    <a href="/Home/DeleteProfile" onclick="return confirm('Hesabınızı silmek istediğinize emin misiniz?');">
+                                    <a href="~/Home/DeleteProfile" onclick="return confirm('Hesabınızı silmek istediğinize emin misiniz?');">
                                         <span class="glyphicon glyphicon-trash"></span> Profili Sil
                                     </a>
                                 </li>

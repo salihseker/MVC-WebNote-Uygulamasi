@@ -55,7 +55,6 @@ namespace WebNote.WebApp.Controllers
             return View(category);
         }
 
-        // GET: Categories/Edit/5
         public ActionResult Edit(int? id)
         {
             if (id == null)
@@ -74,10 +73,18 @@ namespace WebNote.WebApp.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Edit(Category category)
         {
+            ModelState.Remove("CreatedOn");
+            ModelState.Remove("ModifiedOn");
+            ModelState.Remove("ModifiedUsername");
+
             if (ModelState.IsValid)
             {
-                //db.Entry(category).State = EntityState.Modified;
-                //db.SaveChanges();
+                Category cat = categoryManager.Find(x => x.Id == category.Id);
+                cat.Title = category.Title;
+                cat.Description = category.Description;
+
+                categoryManager.Update(cat);
+
                 return RedirectToAction("Index");
             }
             return View(category);

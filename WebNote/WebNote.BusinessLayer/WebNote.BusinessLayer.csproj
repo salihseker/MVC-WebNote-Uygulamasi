@@ -53,10 +53,12 @@
   <ItemGroup>
     <Compile Include="Abstract\ManagerBase.cs" />
     <Compile Include="CategoryManager.cs" />
+    <Compile Include="CommentManager.cs" />
+    <Compile Include="WebNoteUserManager.cs" />
+    <Compile Include="LikedManager.cs" />
     <Compile Include="NoteManager.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Results\BusinessLayerResult.cs" />
-    <Compile Include="WebnoteUserManager.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\WebNote.Common\WebNote.Common.csproj">

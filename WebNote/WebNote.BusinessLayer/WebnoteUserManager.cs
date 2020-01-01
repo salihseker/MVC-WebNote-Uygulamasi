@@ -1,19 +1,19 @@
-﻿using System;
+﻿using WebNote.BusinessLayer.Abstract;
+using WebNote.BusinessLayer.Results;
+using WebNote.Common.Helpers;
+using WebNote.DataAccessLayer.EntityFramework;
+using WebNote.Entities;
+using WebNote.Entities.Messages;
+using WebNote.Entities.ValueObjects;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using WebNote.Entities;
-using WebNote.Entities.ValueObjects;
-using WebNote.DataAccessLayer.EntityFramework;
-using WebNote.BusinessLayer.Results;
-using WebNote.Entities.Messages;
-using WebNote.Common.Helpers;
-using WebNote.BusinessLayer.Abstract;
 
 namespace WebNote.BusinessLayer
 {
-    public class WebnoteUserManager: ManagerBase<WebnoteUser>
+    public class WebnoteUserManager : ManagerBase<WebnoteUser>
     {
         public BusinessLayerResult<WebnoteUser> RegisterUser(RegisterViewModel data)
         {
@@ -38,7 +38,7 @@ namespace WebNote.BusinessLayer
             }
             else
             {
-                int dbResult = Insert(new WebnoteUser()
+                int dbResult = base.Insert(new WebnoteUser()
                 {
                     Username = data.Username,
                     Email = data.EMail,
@@ -64,6 +64,19 @@ namespace WebNote.BusinessLayer
             return res;
         }
 
+        public BusinessLayerResult<WebnoteUser> GetUserById(int id)
+        {
+            BusinessLayerResult<WebnoteUser> res = new BusinessLayerResult<WebnoteUser>();
+            res.Result = Find(x => x.Id == id);
+
+            if (res.Result == null)
+            {
+                res.AddError(ErrorMessageCode.UserNotFound, "Kullanıcı bulunamadı.");
+            }
+
+            return res;
+        }
+
         public BusinessLayerResult<WebnoteUser> LoginUser(LoginViewModel data)
         {
             // Giriş kontrolü
@@ -82,65 +95,6 @@ namespace WebNote.BusinessLayer
             else
             {
                 res.AddError(ErrorMessageCode.UsernameOrPassWrong, "Kullanıcı adı yada şifre uyuşmuyor.");
-            }
-
-            return res;
-        }
-
-        public BusinessLayerResult<WebnoteUser> ActivateUser(Guid activateId)
-        {
-            
-            BusinessLayerResult<WebnoteUser> res = new BusinessLayerResult<WebnoteUser>();
-            res.Result = Find(x => x.ActivateGuid == activateId);
-
-            if (res.Result != null)
-            {
-                if (res.Result.IsActive)
-                {
-                    res.AddError(ErrorMessageCode.UserAlreadyActive, "Kullanıcı zaten aktif edilmiştir.");
-                    return res;
-                }
-
-                res.Result.IsActive = true;
-                Update(res.Result);
-            }
-            else
-            {
-                res.AddError(ErrorMessageCode.ActivateIdDoesNotExists, "Aktifleştirilecek kullanıcı bulunamadı.");
-            }
-
-            return res;
-        }
-
-        public BusinessLayerResult<WebnoteUser> GetUserById(int id)
-        {
-            BusinessLayerResult<WebnoteUser> res = new BusinessLayerResult<WebnoteUser>();
-            res.Result = Find(x => x.Id == id);
-
-            if (res.Result == null)
-            {
-                res.AddError(ErrorMessageCode.UserNotFound, "Kullanıcı bulunamadı.");
-            }
-
-            return res;
-        }
-
-        public BusinessLayerResult<WebnoteUser> RemoveUserById(int id)
-        {
-            BusinessLayerResult<WebnoteUser> res = new BusinessLayerResult<WebnoteUser>();
-            WebnoteUser user = Find(x => x.Id == id);
-
-            if (user != null)
-            {
-                if (Delete(user) == 0)
-                {
-                    res.AddError(ErrorMessageCode.UserCouldNotRemove, "Kullanıcı silinemedi.");
-                    return res;
-                }
-            }
-            else
-            {
-                res.AddError(ErrorMessageCode.UserCouldNotFind, "Kullanıcı bulunamadı.");
             }
 
             return res;
@@ -178,9 +132,127 @@ namespace WebNote.BusinessLayer
                 res.Result.ProfileImageFilename = data.ProfileImageFilename;
             }
 
-            if (Update(res.Result) == 0)
+            if (base.Update(res.Result) == 0)
             {
                 res.AddError(ErrorMessageCode.ProfileCouldNotUpdated, "Profil güncellenemedi.");
+            }
+
+            return res;
+        }
+
+        public BusinessLayerResult<WebnoteUser> RemoveUserById(int id)
+        {
+            BusinessLayerResult<WebnoteUser> res = new BusinessLayerResult<WebnoteUser>();
+            WebnoteUser user = Find(x => x.Id == id);
+
+            if (user != null)
+            {
+                if (Delete(user) == 0)
+                {
+                    res.AddError(ErrorMessageCode.UserCouldNotRemove, "Kullanıcı silinemedi.");
+                    return res;
+                }
+            }
+            else
+            {
+                res.AddError(ErrorMessageCode.UserCouldNotFind, "Kullanıcı bulunamadı.");
+            }
+
+            return res;
+        }
+
+        public BusinessLayerResult<WebnoteUser> ActivateUser(Guid activateId)
+        {
+            BusinessLayerResult<WebnoteUser> res = new BusinessLayerResult<WebnoteUser>();
+            res.Result = Find(x => x.ActivateGuid == activateId);
+
+            if (res.Result != null)
+            {
+                if (res.Result.IsActive)
+                {
+                    res.AddError(ErrorMessageCode.UserAlreadyActive, "Kullanıcı zaten aktif edilmiştir.");
+                    return res;
+                }
+
+                res.Result.IsActive = true;
+                Update(res.Result);
+            }
+            else
+            {
+                res.AddError(ErrorMessageCode.ActivateIdDoesNotExists, "Aktifleştirilecek kullanıcı bulunamadı.");
+            }
+
+            return res;
+        }
+
+
+        // Method hiding..
+        public new BusinessLayerResult<WebnoteUser> Insert(WebnoteUser data)
+        {
+            WebnoteUser user = Find(x => x.Username == data.Username || x.Email == data.Email);
+            BusinessLayerResult<WebnoteUser> res = new BusinessLayerResult<WebnoteUser>();
+
+            res.Result = data;
+
+            if (user != null)
+            {
+                if (user.Username == data.Username)
+                {
+                    res.AddError(ErrorMessageCode.UsernameAlreadyExists, "Kullanıcı adı kayıtlı.");
+                }
+
+                if (user.Email == data.Email)
+                {
+                    res.AddError(ErrorMessageCode.EmailAlreadyExists, "E-posta adresi kayıtlı.");
+                }
+            }
+            else
+            {
+                res.Result.ProfileImageFilename = "user_boy.png";
+                res.Result.ActivateGuid = Guid.NewGuid();
+
+                if (base.Insert(res.Result) == 0)
+                {
+                    res.AddError(ErrorMessageCode.UserCouldNotInserted, "Kullanıcı eklenemedi.");
+                }
+            }
+
+            return res;
+        }
+
+        public new BusinessLayerResult<WebnoteUser> Update(WebnoteUser data)
+        {
+            WebnoteUser db_user = Find(x => x.Username == data.Username || x.Email == data.Email);
+            BusinessLayerResult<WebnoteUser> res = new BusinessLayerResult<WebnoteUser>();
+            res.Result = data;
+
+            if (db_user != null && db_user.Id != data.Id)
+            {
+                if (db_user.Username == data.Username)
+                {
+                    res.AddError(ErrorMessageCode.UsernameAlreadyExists, "Kullanıcı adı kayıtlı.");
+                }
+
+                if (db_user.Email == data.Email)
+                {
+                    res.AddError(ErrorMessageCode.EmailAlreadyExists, "E-posta adresi kayıtlı.");
+                }
+
+                return res;
+            }
+
+            res.Result = Find(x => x.Id == data.Id);
+            res.Result.Email = data.Email;
+            res.Result.Name = data.Name;
+            res.Result.Surname = data.Surname;
+            res.Result.Password = data.Password;
+            res.Result.Username = data.Username;
+            res.Result.IsActive = data.IsActive;
+            res.Result.IsAdmin = data.IsAdmin;
+
+            if (base.Update(res.Result) == 0)
+            {
+                res.AddError(ErrorMessageCode.UserCouldNotUpdated, "Kullanıcı güncellenemedi.");
             }
 
             return res;

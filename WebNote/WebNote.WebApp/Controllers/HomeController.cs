@@ -77,6 +77,9 @@ namespace WebNote.WebApp.Controllers
 
                     return View("Error", errorNotifyObj);
                 }   // yönlendirme..
+
+                CurrentSession.Set<WebnoteUser>("login", res.Result); // Session'a kullanıcı bilgi saklama..
+                return RedirectToAction("Index");   // yönlendirme..
             }
 
                 return View(model);

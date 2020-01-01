@@ -3,3 +3,4 @@ D:\Projeler\MVC-WebNote-Uygulamasi\WebNote\WebNote.Common\bin\Debug\WebNote.Comm
 D:\Projeler\MVC-WebNote-Uygulamasi\WebNote\WebNote.Common\obj\Debug\WebNote.Common.csproj.CoreCompileInputs.cache
 D:\Projeler\MVC-WebNote-Uygulamasi\WebNote\WebNote.Common\obj\Debug\WebNote.Common.dll
 D:\Projeler\MVC-WebNote-Uygulamasi\WebNote\WebNote.Common\obj\Debug\WebNote.Common.pdb
+D:\Projeler\MVC-WebNote-Uygulamasi\WebNote\WebNote.Common\obj\Debug\WebNote.Common.csprojAssemblyReference.cache

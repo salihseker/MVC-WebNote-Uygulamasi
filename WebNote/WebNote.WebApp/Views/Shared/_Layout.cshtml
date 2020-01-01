@@ -1,30 +1,24 @@
 ﻿@using WebNote.WebApp
 @using WebNote.Entities
 @using WebNote.WebApp.Models
-
 <!DOCTYPE html>
-<html lang="en">
-
+<html>
 <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta name="description" content="">
-    <meta name="author" content="">
+    <meta name="description" content="Web Note MVC Uygulaması - Salih ŞEKER">
+    <meta name="author" content="Salih ŞEKER">
     <title>Web Note MVC Uygulaması - Salih ŞEKER</title>
     <!-- Bootstrap Core CSS -->
-    <link href="~/Content/bootstrap.min.css" rel="stylesheet">
+    <link href="~/Content/bootstrap.min.css" rel="stylesheet" />
     <!-- Custom CSS -->
-    <link href="~/Content/shop-homepage.css" rel="stylesheet">
-    <!-- jQuery -->
+    <link href="~/Content/shop-homepage.css" rel="stylesheet" />
     <script src="~/Scripts/jquery-3.1.1.min.js"></script>
-    <!-- Bootstrap Core JavaScript -->
-    <script src="~/Scripts/bootstrap.js"></script>
+    <script src="~/Scripts/bootstrap.min.js"></script>
 
 </head>
-
 <body>
-
     <!-- Navigation -->
     <nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
         <div class="container">
@@ -36,197 +30,105 @@
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </button>
-                <a class="navbar-brand" href="~/Home/Index">WebNote</a>
+                <a class="navbar-brand" href="/Home/Index">Webnote</a>
             </div>
-            <!-- Collect the nav links, forms, and oth er content for toggling -->
+            <!-- Collect the nav links, forms, and other content for toggling -->
             <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
                 <ul class="nav navbar-nav">
                     @if (CurrentSession.User != null)
                     {
-
                         <li class="dropdown">
-                            <a href="~/Note/MyNotes" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
+                            <a href="/Note/MyNotes" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
                                 <span class="glyphicon glyphicon-wrench"></span> Yönetim <span class="caret"></span>
                             </a>
                             <ul class="dropdown-menu">
                                 <li>
-                                    <a href="~/Note/Create">
-                                        <span class="glyphicon glyphicon-plus"> Not Ekle</span>
-                                    </a>
+                                    @Bootstrap.LinkMenu("/Note/Create", "plus", " Not Ekle")
+                                </li>
+                                <li role="separator" class="divider"></li>
+                                <li>
+                                    @Bootstrap.LinkMenu("/Note/Index", "th-list", " Notlarım")
                                 </li>
                                 <li>
-                                    <a href="~/Note/Index">
-                                        <span class="glyphicon glyphicon-th-list"> Notlarım</span>
-                                    </a>
+                                    @Bootstrap.LinkMenu("/Note/MyLikedNotes", "heart", " Beğendiklerim")
                                 </li>
-                                <li>
-                                    <a href="~/Note/MyLikedNotes">
-                                        <span class="glyphicon glyphicon-heart"> Beğendiklerim</span>
-                                    </a>
-                                </li>
-                                <li>
-                                    <a href="~/Home/ShowProfile">
-                                        <span class="glyphicon glyphicon-user"> Profil Göster</span>
-                                    </a>
-                                <li>
-                                    <a href="~/Home/ShowProfile">
-                                        <span class="glyphicon glyphicon-user"> Profil Göster</span>
-                                    </a>
-                                </li>
-
                                 @if (CurrentSession.User.IsAdmin)
                                 {
                                     <li role="separator" class="divider"></li>
                                     <li>
-                                        <a href="~/Category/Create">
-                                            <span class="glyphicon glyphicon-plus"> Kategori Ekle</span>
-                                        </a>
+                                        @Bootstrap.LinkMenu("/Category/Create", "plus", " Kategori Ekle")
                                     </li>
                                     <li>
-                                        <a href="~/Category/Index">
-                                            <span class="glyphicon glyphicon-th-list"> Kategoriler</span>
-                                        </a>
+                                        @Bootstrap.LinkMenu("/Category/Index", "th-list", " Kategoriler")
                                     </li>
+
                                     <li role="separator" class="divider"></li>
                                     <li>
-                                        <a href="~/EvernoteUser/Create">
-                                            <span class="glyphicon glyphicon-plus"> Kullanıcı Ekle</span>
-                                        </a>
+                                        @Bootstrap.LinkMenu("/WebnoteUser/Create", "plus", " Kullanıcı Ekle")
                                     </li>
                                     <li>
-                                        <a href="~/EvernoteUser/Index">
-                                            <span class="glyphicon glyphicon-th-list"> Kullanıcılar</span>
-                                        </a>
+                                        @Bootstrap.LinkMenu("/WebnoteUser/Index", "th-list", " Kullanıcılar")
                                     </li>
                                 }
                             </ul>
                         </li>
                     }
-
                     <li>
-                        <a href="~/Home/MostLiked"><span class="glyphicon glyphicon-star"></span> En Beğenilenler</a>
+                        @Bootstrap.LinkMenu("/Home/MostLiked", "star", " En Beğenilenler")
                     </li>
                     <li>
-                        <a href="~/Home/Index"><span class="glyphicon glyphicon-th-list"></span> Son Yazılanlar</a>
+                        @Bootstrap.LinkMenu("/Home/Index", "th-list", " Son Yazılar")
                     </li>
                     <li>
-                        <a href="~/Home/About"><span class="glyphicon glyphicon-info-sign"></span> Hakkımızda</a>
+                        @Bootstrap.LinkMenu("/Home/About", "info-sign", " Hakkımızda")
                     </li>
-
                 </ul>
                 <ul class="nav navbar-nav navbar-right">
                     @if (CurrentSession.User == null)
                     {
                         <li>
-                            <a href="~/Home/Login">
-                                <span class="glyphicon glyphicon-log-in"> Giriş</span>
-                            </a>
+                            @Bootstrap.LinkMenu("/Home/Login", "log-in", " Giriş")
                         </li>
                         <li>
-                            <a href="~/Home/Register">
-                                <span class="glyphicon glyphicon-user"> Üye Ol</span>
-                            </a>
+                            @Bootstrap.LinkMenu("/Home/Register", "user", " Üye Ol")
                         </li>
                     }
                     else
                     {
-                        <li>
-                            <a href="~/Home/ShowProfile">
-                                <span class="glyphicon glyphicon-user"> @CurrentSession.User.Username</span>
-                            </a>
-                        </li>
-                        <li>
-                            <a href="~/Home/Logout">
-                                <span class="glyphicon glyphicon-log-out"> Çıkış</span>
-                            </a>
-                        </li>
-
                         <li class="dropdown">
-                            <a href="~/Home/ShowProfile" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
+                            <a href="/Home/ShowProfile" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
                                 <span class="glyphicon glyphicon-user"></span> @CurrentSession.User.Username <span class="caret"></span>
                             </a>
                             <ul class="dropdown-menu">
                                 <li>
-                                    <a href="~/Home/ShowProfile">
-                                        <span class="glyphicon glyphicon-user"> Profil Göster</span>
-                                    </a>
+                                    @Bootstrap.LinkMenu("/Home/ShowProfile", "user", " Profili Göster")
                                 </li>
                                 <li role="separator" class="divider"></li>
                                 <li>
-                                    <a href="~/Home/EditProfile">
-                                        <span class="glyphicon glyphicon-user"> Profil Düzenle</span>
-                                    </a>
+                                    @Bootstrap.LinkMenu("/Home/EditProfile", "edit", " Profili Düzenle")
                                 </li>
                                 <li>
-                                    <a href="~/Home/DeleteProfile" onclick="return confirm('Hesabınızı silmek istediğinize emin misiniz?');">
+                                    <a href="/Home/DeleteProfile" onclick="return confirm('Hesabınızı silmek istediğinize emin misiniz?');">
                                         <span class="glyphicon glyphicon-trash"></span> Profili Sil
                                     </a>
                                 </li>
                             </ul>
                         </li>
+
+                        <li>
+                            @Bootstrap.LinkMenu("/Home/Logout", "log-out", " Çıkış")
+                        </li>
                     }
-
-
                 </ul>
             </div>
             <!-- /.navbar-collapse -->
         </div>
         <!-- /.container -->
     </nav>
-
-    <!-- Page Content -->
+    @section footer{
+        @Html.Partial("_PartialFooter")
+    }
     @RenderBody()
-    <!-- /.container -->
-
-    <div class="container">
-
-        <hr>
-
-        <!-- Footer -->
-        <footer>
-            <div class="row">
-                <div class="col-lg-4 text-center">
-                    <h5>
-                        <strong>Site Haritası</strong>
-                    </h5>
-                    <hr />
-                    <p>
-                        <a href="#">En Beğenilenler</a><br />
-                        <a href="#">Son Yazılanlar</a><br />
-                        <a href="#">Hakkımızda</a><br />
-                    </p>
-                </div>
-                <div class="col-lg-4 text-center">
-                    <h5>
-                        <strong>WebNote</strong>
-                    </h5>
-                    <hr />
-                    <p>Tüm Hakları Saklıdır &copy; Salih ŞEKER - WebNote @DateTime.Now.Year</p>
-                </div>
-                <div class="col-lg-4 text-center" ">
-                    <h5>
-                        <strong>E-Bülten Üyelik</strong>
-                    </h5>
-                    <hr />
-                    <div class="col-md-12">
-                        <div class="input-group">
-                            <input type="text" class="form-control" placeholder="e-posta adresiniz">
-                            <span class="input-group-btn">
-                                <button class="btn btn-primary" type="submit">
-                                    Gönder <span class="glyphicon glyphicon-send"></span>
-                                </button>
-                            </span>
-
-                        </div>
-                    </div>
-
-                </div>
-            </div>
-        </footer>
-
-    </div>
-    <!-- /.container -->
-
+    @RenderSection("footer", required: false)
 </body>
-
 </html>

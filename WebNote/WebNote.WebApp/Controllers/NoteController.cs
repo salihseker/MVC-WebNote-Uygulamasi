@@ -56,7 +56,7 @@ namespace WebNote.WebApp.Controllers
        
         public ActionResult Create()
         {
-            ViewBag.CategoryId = new SelectList(categoryManager.List(), "Id", "Title");
+            ViewBag.CategoryId = new SelectList(CacheHelper.GetCategoriesFromCache(), "Id", "Title");
             return View();
         }
 
@@ -76,7 +76,7 @@ namespace WebNote.WebApp.Controllers
                 return RedirectToAction("Index");
             }
 
-            ViewBag.CategoryId = new SelectList(categoryManager.List(), "Id", "Title", note.CategoryId);
+            ViewBag.CategoryId = new SelectList(CacheHelper.GetCategoriesFromCache(), "Id", "Title", note.CategoryId);
             return View(note);
         }
 
@@ -92,7 +92,7 @@ namespace WebNote.WebApp.Controllers
             {
                 return HttpNotFound();
             }
-            ViewBag.CategoryId = new SelectList(categoryManager.List(), "Id", "Title", note.CategoryId);
+            ViewBag.CategoryId = new SelectList(CacheHelper.GetCategoriesFromCache(), "Id", "Title", note.CategoryId);
             return View(note);
         }
 
@@ -117,7 +117,7 @@ namespace WebNote.WebApp.Controllers
 
                 return RedirectToAction("Index");
             }
-            ViewBag.CategoryId = new SelectList(categoryManager.List(), "Id", "Title", note.CategoryId);
+            ViewBag.CategoryId = new SelectList(CacheHelper.GetCategoriesFromCache(), "Id", "Title", note.CategoryId);
             return View(note);
         }
 

@@ -1,8 +1,7 @@
-﻿@using WebNote.Entities;
-@using WebNote.BusinessLayer;
+﻿@using WebNote.WebApp.Models;
+@using WebNote.Entities;
 @{ 
-    CategoryManager cm = new CategoryManager();
-    List<Category> categories = cm.List();
+    List<Category> categories = CacheHelper.GetCategoriesFromCache();
 
 }
 <p class="lead">Kategoriler</p>

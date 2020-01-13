@@ -49,6 +49,7 @@ namespace WebNote.WebApp.Controllers
             if (ModelState.IsValid)
             {
                 categoryManager.Insert(category);
+                CacheHelper.RemoveCategoriesFromCache();
                 return RedirectToAction("Index");
             }
 
@@ -84,6 +85,7 @@ namespace WebNote.WebApp.Controllers
                 cat.Description = category.Description;
 
                 categoryManager.Update(cat);
+                CacheHelper.RemoveCategoriesFromCache();
 
                 return RedirectToAction("Index");
             }
@@ -110,6 +112,8 @@ namespace WebNote.WebApp.Controllers
         {
             Category category = categoryManager.Find(x => x.Id == id);
             categoryManager.Delete(category);
+
+            CacheHelper.RemoveCategoriesFromCache();
 
             return RedirectToAction("Index");
         }

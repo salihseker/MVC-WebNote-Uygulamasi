@@ -95,12 +95,12 @@
 
                             <div class="ratings">
                                 <p class="pull-right">
-                                    <button class="btn btn-default btn-sm" data-toggle="modal" data-target="#modal_comment" data-note-id="1">
+                                    <button class="btn btn-default btn-sm" data-toggle="modal" data-target="#modal_comment" data-note-id="@note.Id">
                                         <span class="glyphicon glyphicon-comment"></span> Yorumlar
                                     </button>
                                 </p>
                                 <p>
-                                    <button class="btn btn-default btn-sm" type="button" data-liked="false" data-note-id="1">
+                                    <button class="btn btn-default btn-sm" type="button" data-liked="false" data-note-id="@note.Id">
                                         <span class="glyphicon glyphicon-star-empty like-star"></span>&nbsp;
                                         <span class="like-count">@note.LikeCount</span>
                                     </button>
@@ -123,3 +123,19 @@
 @section footer{
     @Html.Partial("_PartialFooter")
 }
+
+@Bootstrap.ModalPopup(id: "modal_comment", title: "Yorumlar")
+
+<script>
+    $(function () {
+
+        $('#modal_comment').on('show.bs.modal', function (e) {
+
+            var btn = $(e.relatedTarget);
+            var noteid = btn.data("note-id");
+            $("#modal_comment_body").load("/Comment/ShowNoteComments/" + noteid);
+        })
+
+    });
+</script>
+

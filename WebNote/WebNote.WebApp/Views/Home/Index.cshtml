@@ -51,7 +51,7 @@
             <div class="row">
                 @foreach (Note note in Model)
                 {
-                    <div class="col-sm-4 col-lg-4 col-md-4" data-note-id="1">
+                    <div class="col-sm-4 col-lg-4 col-md-4" data-note-id="@note.Id">
                         <div class="thumbnail">
                             <img src="http://placehold.it/320x150" alt="@note.Title">
                             <div class="caption">
@@ -127,3 +127,4 @@
 @Bootstrap.ModalPopup(id: "modal_comment", title: "Yorumlar")
 
 <script src="~/Content/comment.js"></script>
+<script src="~/Scripts/like.js"></script>

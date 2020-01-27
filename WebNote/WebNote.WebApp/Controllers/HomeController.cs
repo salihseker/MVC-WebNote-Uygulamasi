@@ -23,7 +23,7 @@ namespace WebNote.WebApp.Controllers
         // GET: Home
         public ActionResult Index()
         {
-            return View(noteManager.ListQueryable().OrderByDescending(x => x.ModifiedOn).ToList());
+            return View(noteManager.ListQueryable().Where(x => x.IsDraft == false).OrderByDescending(x => x.ModifiedOn).ToList());
         }
 
         public ActionResult ByCategory(int? id)
@@ -39,12 +39,12 @@ namespace WebNote.WebApp.Controllers
                 return HttpNotFound();
             }
 
-            return View("Index", cat.Notes.OrderByDescending(x => x.LikeCount).ToList());
+            return View("Index", cat.Notes.Where(x => x.IsDraft == false).OrderByDescending(x => x.LikeCount).ToList());
         }
 
         public ActionResult MostLiked()
         {
-            return View("Index", noteManager.ListQueryable().OrderByDescending(x => x.LikeCount).ToList());
+            return View("Index", noteManager.ListQueryable().Where(x => x.IsDraft == false).OrderByDescending(x => x.LikeCount).ToList());
         }
 
         public ActionResult About()

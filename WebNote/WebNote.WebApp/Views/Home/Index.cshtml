@@ -56,7 +56,7 @@
                             <img src="http://placehold.it/320x150" alt="@note.Title">
                             <div class="caption">
                                 <h4>
-                                    <a href="#" data-toggle="modal" data-target="#modal_notedetail" data-note-id="1">
+                                    <a href="#" data-toggle="modal" data-target="#modal_notedetail" data-note-id="@note.Id">
                                         @note.Title
                                     </a>
                                 </h4>
@@ -70,7 +70,7 @@
                                         @(note.Text.Substring(0, 57) + "...")
                                     </p>
                                     <p calss="pull-right">
-                                        <a href="#" class="btn btn-primary btn-xs"> Devamını Oku <span class="glyphicon glyphicon-chevron-right"></span></a>
+                                        <a href="#" class="btn btn-primary btn-xs" data-toggle="modal" data-target="#modal_notedetail" data-note-id="@note.Id"> Devamını Oku <span class="glyphicon glyphicon-chevron-right"></span></a>
                                     </p>
                                 }
                                 else
@@ -125,6 +125,8 @@
 }
 
 @Bootstrap.ModalPopup(id: "modal_comment", title: "Yorumlar")
+@Bootstrap.ModalPopup(id: "modal_notedetail", title: "Not Detayı")
 
-<script src="~/Content/comment.js"></script>
+<script src="~/Scripts/comment.js"></script>
 <script src="~/Scripts/like.js"></script>
+<script src="~/Scripts/NoteDetailPopup.js"></script>

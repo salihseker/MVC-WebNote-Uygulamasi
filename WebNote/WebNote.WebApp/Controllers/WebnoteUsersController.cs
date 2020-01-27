@@ -14,6 +14,7 @@ using WebNote.WebApp.Filters;
 namespace WebNote.WebApp.Controllers
 {
     [Auth]
+    [AuthAdmin]
     public class WebnoteUserController : Controller
     {
         private WebnoteUserManager WebnoteUserManager = new WebnoteUserManager();

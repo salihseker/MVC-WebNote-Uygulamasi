@@ -187,6 +187,7 @@
     <Compile Include="Controllers\NoteController.cs" />
     <Compile Include="Controllers\WebnoteUsersController.cs" />
     <Compile Include="Filters\Auth.cs" />
+    <Compile Include="Filters\AuthAdmin.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>

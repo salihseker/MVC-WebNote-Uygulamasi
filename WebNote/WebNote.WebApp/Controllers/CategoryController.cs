@@ -14,6 +14,7 @@ using WebNote.WebApp.Models;
 namespace WebNote.WebApp.Controllers
 {
     [Auth]
+    [AuthAdmin]
     public class CategoryController : Controller
     {
 

@@ -9,7 +9,7 @@ using System.Web.Mvc;
 using WebNote.Entities;
 using WebNote.WebApp.Models;
 using WebNote.BusinessLayer;
-
+using WebNote.WebApp.Filters;
 
 namespace WebNote.WebApp.Controllers
 {
@@ -19,6 +19,7 @@ namespace WebNote.WebApp.Controllers
         private CategoryManager categoryManager = new CategoryManager();
         private LikedManager likedManager = new LikedManager();
 
+        [Auth]
         public ActionResult Index()
         {
             var notes = noteManager.ListQueryable().Include("Category").Include("Owner").Where(
@@ -28,7 +29,7 @@ namespace WebNote.WebApp.Controllers
             return View(notes.ToList());
         }
 
-
+        [Auth]
         public ActionResult MyLikedNotes()
         {
             var notes = likedManager.ListQueryable().Include("LikedUser").Include("Note").Where(
@@ -38,7 +39,7 @@ namespace WebNote.WebApp.Controllers
 
             return View("Index", notes.ToList());
         }
-
+        [Auth]
         public ActionResult Details(int? id)
         {
             if (id == null)
@@ -60,7 +61,7 @@ namespace WebNote.WebApp.Controllers
             return View();
         }
 
-       
+        [Auth]
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult Create(Note note)
@@ -80,7 +81,7 @@ namespace WebNote.WebApp.Controllers
             return View(note);
         }
 
-       
+        [Auth]
         public ActionResult Edit(int? id)
         {
             if (id == null)
@@ -96,7 +97,7 @@ namespace WebNote.WebApp.Controllers
             return View(note);
         }
 
-       
+        [Auth]
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult Edit(Note note)
@@ -121,7 +122,7 @@ namespace WebNote.WebApp.Controllers
             return View(note);
         }
 
-       
+        [Auth]
         public ActionResult Delete(int? id)
         {
             if (id == null)
@@ -136,7 +137,7 @@ namespace WebNote.WebApp.Controllers
             return View(note);
         }
 
-       
+        [Auth]
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)

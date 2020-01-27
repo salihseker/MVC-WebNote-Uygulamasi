@@ -7,6 +7,7 @@ using System.Web;
 using System.Web.Mvc;
 using WebNote.BusinessLayer;
 using WebNote.Entities;
+using WebNote.WebApp.Filters;
 using WebNote.WebApp.Models;
 
 namespace WebNote.WebApp.Controllers
@@ -34,6 +35,7 @@ namespace WebNote.WebApp.Controllers
             return PartialView("_PartialComments", note.Comments.ToList());
         }
 
+        [Auth]
         [HttpPost]
         public ActionResult Edit(int? id, string text)
         {
@@ -59,6 +61,7 @@ namespace WebNote.WebApp.Controllers
             return Json(new { result = false }, JsonRequestBehavior.AllowGet);
         }
 
+        [Auth]
         public ActionResult Delete(int? id)
         {
             if (id == null)
@@ -81,6 +84,7 @@ namespace WebNote.WebApp.Controllers
             return Json(new { result = false }, JsonRequestBehavior.AllowGet);
         }
 
+        [Auth]
         [HttpPost]
         public ActionResult Create(Comment comment, int? noteid)
         {

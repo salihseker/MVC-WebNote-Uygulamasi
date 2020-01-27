@@ -9,11 +9,11 @@ using System.Web.Mvc;
 using WebNote.Entities;
 using WebNote.BusinessLayer;
 using WebNote.BusinessLayer.Results;
-
+using WebNote.WebApp.Filters;
 
 namespace WebNote.WebApp.Controllers
 {
-
+    [Auth]
     public class WebnoteUserController : Controller
     {
         private WebnoteUserManager WebnoteUserManager = new WebnoteUserManager();

@@ -12,6 +12,7 @@ using WebNote.BusinessLayer.Results;
 using WebNote.Entities.Messages;
 using WebNote.WebApp.ViewModels;
 using WebNote.WebApp.Models;
+using WebNote.WebApp.Filters;
 
 namespace WebNote.WebApp.Controllers
 {
@@ -167,6 +168,7 @@ namespace WebNote.WebApp.Controllers
             return RedirectToAction(nameof(Index));
         }
 
+        [Auth]
         public ActionResult ShowProfile()
         {
             BusinessLayerResult<WebnoteUser> res = webnoteUserManager.GetUserById(CurrentSession.User.Id);
@@ -184,7 +186,7 @@ namespace WebNote.WebApp.Controllers
 
             return View(res.Result);
         }
-
+        [Auth]
         public ActionResult EditProfile()
         {
             BusinessLayerResult<WebnoteUser> res = webnoteUserManager.GetUserById(CurrentSession.User.Id);
@@ -203,6 +205,7 @@ namespace WebNote.WebApp.Controllers
             return View(res.Result);
         }
 
+        [Auth]
         [HttpPost]
         public ActionResult EditProfile(WebnoteUser model, HttpPostedFileBase ProfileImage)
         {
@@ -244,6 +247,7 @@ namespace WebNote.WebApp.Controllers
             return View(model);
         }
 
+        [Auth]
         public ActionResult DeleteProfile()
         {
             BusinessLayerResult<WebnoteUser> res = webnoteUserManager.RemoveUserById(CurrentSession.User.Id);

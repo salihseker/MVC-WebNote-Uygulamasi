@@ -8,10 +8,12 @@ using System.Web;
 using System.Web.Mvc;
 using WebNote.BusinessLayer;
 using WebNote.Entities;
+using WebNote.WebApp.Filters;
 using WebNote.WebApp.Models;
 
 namespace WebNote.WebApp.Controllers
 {
+    [Auth]
     public class CategoryController : Controller
     {
 

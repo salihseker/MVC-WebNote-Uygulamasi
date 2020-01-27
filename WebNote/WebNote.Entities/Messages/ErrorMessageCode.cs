@@ -20,6 +20,7 @@ namespace WebNote.Entities.Messages
         UserCouldNotRemove = 158,
         UserCouldNotFind = 159,
         UserCouldNotInserted = 160,
-        UserCouldNotUpdated = 161
+        UserCouldNotUpdated = 161,
+        SystemException = 162
     }
 }

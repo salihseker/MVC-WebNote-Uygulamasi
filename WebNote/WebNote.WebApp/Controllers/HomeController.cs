@@ -24,6 +24,9 @@ namespace WebNote.WebApp.Controllers
         // GET: Home
         public ActionResult Index()
         {
+
+           // throw new Exception("Herhangi bir hata oluştu.");
+
             return View(noteManager.ListQueryable().Where(x => x.IsDraft == false).OrderByDescending(x => x.ModifiedOn).ToList());
         }
 
@@ -65,7 +68,7 @@ namespace WebNote.WebApp.Controllers
             {
                 BusinessLayerResult<WebnoteUser> res = webnoteUserManager.LoginUser(model);
 
-    
+
 
                 CurrentSession.Set<WebnoteUser>("login", res.Result); //session da kullanıcı bilgisi saklama
                 if (res.Errors.Count > 0)
@@ -83,13 +86,13 @@ namespace WebNote.WebApp.Controllers
                 return RedirectToAction("Index");   // yönlendirme..
             }
 
-                return View(model);
+            return View(model);
         }
 
         public ActionResult Register()
         {
-                
-               return View();
+
+            return View();
         }
 
         [HttpPost]
@@ -117,12 +120,12 @@ namespace WebNote.WebApp.Controllers
                 //        return View(model);
                 //    }
                 //}
-                
+
                 return RedirectToAction("RegisterOk");
             }
             return View(model);
-            
-            
+
+
         }
 
         public ActionResult RegisterOk()
@@ -130,7 +133,7 @@ namespace WebNote.WebApp.Controllers
             return View();
         }
 
-      
+
 
 
         public ActionResult UserActivate(Guid id)
@@ -159,7 +162,7 @@ namespace WebNote.WebApp.Controllers
             return View("Ok", okNotifyObj);
         }
 
-        
+
 
         public ActionResult Logout()
         {

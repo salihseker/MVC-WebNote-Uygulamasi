@@ -5,6 +5,7 @@ using System.Web;
 using System.Web.Mvc;
 using System.Web.Routing;
 using WebNote.Common;
+using WebNote.WebApp.Filters;
 using WebNote.WebApp.Init;
 
 namespace WebNote.WebApp
@@ -17,6 +18,10 @@ namespace WebNote.WebApp
             RouteConfig.RegisterRoutes(RouteTable.Routes);
 
             App.Common = new WebCommon();
+            
+            //Exception Filter ın tüm projede geçerli olması için GlobalAsax ta tanımını yaptık.
+            GlobalFilters.Filters.Add(new Exc());
+            
         }
 
         

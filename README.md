@@ -14,3 +14,12 @@ Genel olarak proje içeriğinde bulunan yapılar ve işlemler bu şekildedir.
 Ekran Görüntüleri : 
 
 
+![Image description](https://github.com/salihseker/MVC-WebNote-Uygulamasi/blob/master/WebNote/Docs/Screenshot_1.png)
+![Image description](https://github.com/salihseker/MVC-WebNote-Uygulamasi/blob/master/WebNote/Docs/Screenshot_12.png)
+![Image description](https://github.com/salihseker/MVC-WebNote-Uygulamasi/blob/master/WebNote/Docs/Screenshot_13.png)
+![Image description](https://github.com/salihseker/MVC-WebNote-Uygulamasi/blob/master/WebNote/Docs/Screenshot_14.png)
+![Image description](https://github.com/salihseker/MVC-WebNote-Uygulamasi/blob/master/WebNote/Docs/Screenshot_15.png)
+![Image description](https://github.com/salihseker/MVC-WebNote-Uygulamasi/blob/master/WebNote/Docs/Screenshot_15.png)
+![Image description](https://github.com/salihseker/MVC-WebNote-Uygulamasi/blob/master/WebNote/Docs/Screenshot_16.png)
+![Image description](https://github.com/salihseker/MVC-WebNote-Uygulamasi/blob/master/WebNote/Docs/Screenshot_17.png)
+![Image description](https://github.com/salihseker/MVC-WebNote-Uygulamasi/blob/master/WebNote/Docs/Screenshot_18.png)
